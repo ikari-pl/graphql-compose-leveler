@@ -5,8 +5,7 @@
   "main": "lib.js",
   "scripts": {
     "test": "mocha",
-    "build": "tsc",
-
+    "build": "tsc; doctoc README.md",
     "reformat": "prettier --print-width 100 --write '**/*.ts'",
     "style": "npm run reformat && npm run tslint:fix",
     "sync-version": "node scripts/syncVersion",
@@ -38,6 +37,7 @@
   "devDependencies": {
     "@types/graphql": "^0.11.6",
     "@types/lodash": "^4.14.85",
+    "doctoc": "^1.3.0",
     "mocha": "^4.0.1",
     "prettier": "^1.8.2",
     "tslint": "^5.8.0",
