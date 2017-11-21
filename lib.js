@@ -3,9 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("graphql");
 const graphql_anyscalar_1 = require("graphql-anyscalar");
 const _ = require("lodash");
-function is(object, instanceOf) {
-    return !!(object.constructor && object.constructor.name === instanceOf);
-}
 // graphql-leveler implementation for graphql-compose
 function levelerize(tc, levelerVisited) {
     const fieldNames = tc.getFieldNames();
@@ -15,13 +12,7 @@ function levelerize(tc, levelerVisited) {
     levelerVisited.add(tc.getTypeName());
     for (const fieldName of fieldNames) {
         const fieldType = tc.getFieldType(fieldName);
-        if (
-        /*
-              fieldType instanceof GraphQLObjectType ||
-        (fieldType instanceof GraphQLList && fieldType.ofType instanceof GraphQLObjectType)
-  
-         */
-        fieldType instanceof graphql_1.GraphQLObjectType ||
+        if (fieldType instanceof graphql_1.GraphQLObjectType ||
             (fieldType instanceof graphql_1.GraphQLList && fieldType.ofType instanceof graphql_1.GraphQLObjectType)) {
             const fieldTC = tc.getFieldTC(fieldName);
             levelerize(tc.getFieldTC(fieldName), levelerVisited);
@@ -29,9 +20,9 @@ function levelerize(tc, levelerVisited) {
                 _get: {
                     type: graphql_anyscalar_1.AnyScalar,
                     args: {
-                        path: { type: new graphql_1.GraphQLNonNull(graphql_1.GraphQLString) },
-                        defaultValue: { type: graphql_anyscalar_1.AnyScalar },
-                        allowUndefined: { type: graphql_1.GraphQLBoolean }
+                        path: "String!",
+                        defaultValue: graphql_anyscalar_1.AnyScalar,
+                        allowUndefined: "Boolean"
                     },
                     resolve: (obj, { path, defaultValue, allowUndefined = false }) => {
                         const val = _.get(obj, path, defaultValue);
@@ -45,10 +36,9 @@ function levelerize(tc, levelerVisited) {
                 _pluck: {
                     type: new graphql_1.GraphQLList(graphql_anyscalar_1.AnyScalar),
                     args: {
-                        list: { type: new graphql_1.GraphQLNonNull(graphql_1.GraphQLString) },
-                        path: { type: new graphql_1.GraphQLNonNull(graphql_1.GraphQLString) },
-                        defaultValue: { type: graphql_anyscalar_1.AnyScalar },
-                        allowUndefined: { type: graphql_1.GraphQLBoolean }
+                        list: "String!",
+                        path: "String!",
+                        allowUndefined: "Boolean"
                     },
                     resolve: (obj, { list, path, allowUndefined = false }) => {
                         const theList = _.get(obj, list, []);

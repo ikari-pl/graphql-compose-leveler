@@ -1,16 +1,13 @@
 import {
   GraphQLBoolean,
   GraphQLList,
-  GraphQLNonNull, GraphQLObjectType,
+  GraphQLNonNull,
+  GraphQLObjectType,
   GraphQLString
 } from "graphql";
 import { AnyScalar } from "graphql-anyscalar";
 import { ComposeStorage, TypeComposer } from "graphql-compose";
 import * as _ from "lodash";
-
-function is(object: any, instanceOf: string) {
-  return !!(object.constructor && object.constructor.name === instanceOf);
-}
 
 // graphql-leveler implementation for graphql-compose
 function levelerize(tc: TypeComposer, levelerVisited: Set<string>) {
@@ -22,11 +19,6 @@ function levelerize(tc: TypeComposer, levelerVisited: Set<string>) {
   for (const fieldName of fieldNames) {
     const fieldType = tc.getFieldType(fieldName);
     if (
-      /*
-            fieldType instanceof GraphQLObjectType ||
-      (fieldType instanceof GraphQLList && fieldType.ofType instanceof GraphQLObjectType)
-
-       */
       fieldType instanceof GraphQLObjectType ||
       (fieldType instanceof GraphQLList && fieldType.ofType instanceof GraphQLObjectType)
     ) {
@@ -36,9 +28,9 @@ function levelerize(tc: TypeComposer, levelerVisited: Set<string>) {
         _get: {
           type: AnyScalar,
           args: {
-            path: { type: new GraphQLNonNull(GraphQLString) },
-            defaultValue: { type: AnyScalar },
-            allowUndefined: { type: GraphQLBoolean }
+            path: "String!",
+            defaultValue: AnyScalar,
+            allowUndefined: "Boolean"
           },
           resolve: (obj, { path, defaultValue, allowUndefined = false }) => {
             const val = _.get(obj, path, defaultValue);
@@ -52,10 +44,9 @@ function levelerize(tc: TypeComposer, levelerVisited: Set<string>) {
         _pluck: {
           type: new GraphQLList(AnyScalar),
           args: {
-            list: { type: new GraphQLNonNull(GraphQLString) },
-            path: { type: new GraphQLNonNull(GraphQLString) },
-            defaultValue: { type: AnyScalar },
-            allowUndefined: { type: GraphQLBoolean }
+            list: "String!",
+            path: "String!",
+            allowUndefined: "Boolean"
           },
           resolve: (obj, { list, path, allowUndefined = false }) => {
             const theList = _.get(obj, list, []);
