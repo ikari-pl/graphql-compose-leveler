@@ -1,0 +1,47 @@
+{
+  "name": "graphql-compose-leveler",
+  "version": "1.0.0",
+  "description": "Lets GraphQL servers allow client queries to mutate the shape of response objects. A graphql-leveler adaptation for use with graphql-compose.",
+  "main": "lib.js",
+  "scripts": {
+    "test": "mocha",
+    "build": "tsc",
+
+    "reformat": "prettier --print-width 100 --write '**/*.ts'",
+    "style": "npm run reformat && npm run tslint:fix",
+    "sync-version": "node scripts/syncVersion",
+    "tslint": "tslint --type-check --project tsconfig.json -c tslint.json --exclude 'node_modules'",
+    "tslint:fix": "npm run tslint -- --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ikari-pl/graphql-compose-leveler.git"
+  },
+  "keywords": [
+    "graphql-compose",
+    "graphql",
+    "graphql-leveler",
+    "lodash"
+  ],
+  "author": "Cezar \"ikari\" Pokorski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ikari-pl/graphql-compose-leveler/issues"
+  },
+  "homepage": "https://github.com/ikari-pl/graphql-compose-leveler#readme",
+  "dependencies": {
+    "graphql": "^0.11.7",
+    "graphql-anyscalar": "^1.1.2",
+    "graphql-compose": "^2.9.6",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "@types/graphql": "^0.11.6",
+    "@types/lodash": "^4.14.85",
+    "mocha": "^4.0.1",
+    "prettier": "^1.8.2",
+    "tslint": "^5.8.0",
+    "tslint-sonarts": "^1.1.1",
+    "typescript": "^2.6.1"
+  }
+}

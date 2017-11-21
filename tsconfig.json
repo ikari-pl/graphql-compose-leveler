@@ -1,0 +1,16 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "lib": [
+      "esnext",
+      "esnext.asynciterable",
+      "es2015.iterable"
+    ],
+    "target": "es6",
+    "module": "commonjs",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "noImplicitThis": true
+  }
+}

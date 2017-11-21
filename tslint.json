@@ -1,0 +1,39 @@
+{
+  "extends": ["tslint:recommended", "tslint-sonarts"],
+  "Rules": {
+    "class-name": true,
+    "no-duplicate-variable": true,
+    "no-eval": true,
+    "no-unsafe-finally": true,
+    "triple-equals": [true, "allow-null-check"],
+    "variable-name": [true, "ban-keywords"]
+  },
+  "rules": {
+    "no-namespace": [false],
+    "no-unused-expression": [false],
+    "one-variable-per-declaration": [false],
+    "prefer-for-of": false,
+    "no-bitwise": false,
+    "trailing-comma": [false],
+    "arrow-parens": false,
+    "max-classes-per-file": [false],
+    "member-access": [false],
+    "object-literal-sort-keys": [false],
+    "array-type": [false],
+    "whitespace": [false],
+    "interface-name": [false],
+    "no-console": [false],
+    "max-line-length": [false],
+    "interface-over-type-literal": false,
+    "class-name": true,
+    "curly": true,
+    "no-eval": true,
+    "no-internal-module": true,
+    "no-unsafe-finally": true,
+    "no-var-requires": false,
+    "no-var-keyword": true,
+    "triple-equals": [true, "allow-null-check"],
+    "variable-name": [true, "ban-keywords"],
+    "no-unused-variable": [true, {"ignore-pattern": "^_"}]
+  }
+}
