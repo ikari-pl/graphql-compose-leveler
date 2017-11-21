@@ -2,9 +2,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "lib": [
-      "esnext",
-      "esnext.asynciterable",
-      "es2015.iterable"
+      "es7",
+      "esnext.asynciterable"
     ],
     "target": "es6",
     "module": "commonjs",
