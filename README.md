@@ -26,7 +26,11 @@ A [`graphql-leveler`][graphql-leveler] inspired util for use with [`graphql-comp
  
 ## Background
  
- A developer once asked for a feature that [graphql-leveler][graphql-leveler] provides, but our API was built using the awesome library called [graphql-compose][graphql-compose].  
+ A developer once asked for a feature that [graphql-leveler][graphql-leveler] provides, but our API was built using the awesome library called [graphql-compose][graphql-compose]. It required replacing all `GraphQLObjectType`s in the source code of the app with `LevelerObjectType`.
+  
+  But since we used `graphql-compose`, the `TypeComposer` interface and its GraphQL-schema parser, we couldn't always replace the base type easily (in schema syntax). 
+  
+  On the other hand, `graphql-compose` allowed us to modify the types anytime before the schema is finally generated and passed to the GraphQL server. So after discovering that `graphql-leveler`'s code is very simple, I've reimplemented its functionality using `TypeComposer` magic. 
  
  
 ## Install
@@ -37,10 +41,21 @@ A [`graphql-leveler`][graphql-leveler] inspired util for use with [`graphql-comp
 
 ## Usage
 
+```js
+const leveler = require("graphql-compose-leveler");
+
+// You usually start with creating a ComposeStorage
+const GQC = new ComposeStorage();
+// ... building API ...
+// now add leveler's magic to all queries in rootQuery 
+levelerize(GQC);
+// ... and finally build schema:
+const schema = GQC.buildSchema();
+```
 
 ## Contribute
 
-PRs accepted. 
+PRs accepted. Semver versioning used.
 
 ### Maintainers
 
