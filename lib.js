@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("graphql");
 const graphql_anyscalar_1 = require("graphql-anyscalar");
 const _ = require("lodash");
+function is(object, instanceOf) {
+    return !!(object.constructor && object.constructor.name === instanceOf);
+}
 // graphql-leveler implementation for graphql-compose
 function levelerize(tc, levelerVisited) {
     const fieldNames = tc.getFieldNames();
@@ -12,7 +15,13 @@ function levelerize(tc, levelerVisited) {
     levelerVisited.add(tc.getTypeName());
     for (const fieldName of fieldNames) {
         const fieldType = tc.getFieldType(fieldName);
-        if (fieldType instanceof graphql_1.GraphQLObjectType ||
+        if (
+        /*
+              fieldType instanceof GraphQLObjectType ||
+        (fieldType instanceof GraphQLList && fieldType.ofType instanceof GraphQLObjectType)
+  
+         */
+        fieldType instanceof graphql_1.GraphQLObjectType ||
             (fieldType instanceof graphql_1.GraphQLList && fieldType.ofType instanceof graphql_1.GraphQLObjectType)) {
             const fieldTC = tc.getFieldTC(fieldName);
             levelerize(tc.getFieldTC(fieldName), levelerVisited);
@@ -61,8 +70,8 @@ function levelerize(tc, levelerVisited) {
         }
     }
 }
-function default_1(GQC) {
-    levelerize(GQC.rootQuery(), new Set());
+function default_1(tc) {
+    levelerize(tc, new Set());
 }
 exports.default = default_1;
 //# sourceMappingURL=lib.js.map

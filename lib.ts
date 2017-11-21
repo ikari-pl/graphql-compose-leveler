@@ -1,13 +1,16 @@
 import {
   GraphQLBoolean,
   GraphQLList,
-  GraphQLNonNull,
-  GraphQLObjectType,
+  GraphQLNonNull, GraphQLObjectType,
   GraphQLString
 } from "graphql";
 import { AnyScalar } from "graphql-anyscalar";
 import { ComposeStorage, TypeComposer } from "graphql-compose";
 import * as _ from "lodash";
+
+function is(object: any, instanceOf: string) {
+  return !!(object.constructor && object.constructor.name === instanceOf);
+}
 
 // graphql-leveler implementation for graphql-compose
 function levelerize(tc: TypeComposer, levelerVisited: Set<string>) {
@@ -19,6 +22,11 @@ function levelerize(tc: TypeComposer, levelerVisited: Set<string>) {
   for (const fieldName of fieldNames) {
     const fieldType = tc.getFieldType(fieldName);
     if (
+      /*
+            fieldType instanceof GraphQLObjectType ||
+      (fieldType instanceof GraphQLList && fieldType.ofType instanceof GraphQLObjectType)
+
+       */
       fieldType instanceof GraphQLObjectType ||
       (fieldType instanceof GraphQLList && fieldType.ofType instanceof GraphQLObjectType)
     ) {
@@ -70,6 +78,6 @@ function levelerize(tc: TypeComposer, levelerVisited: Set<string>) {
   }
 }
 
-export default function(GQC: ComposeStorage) {
-  levelerize(GQC.rootQuery(), new Set<string>());
+export default function(tc: TypeComposer) {
+  levelerize(tc, new Set<string>());
 }

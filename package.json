@@ -28,10 +28,12 @@
     "url": "https://github.com/ikari-pl/graphql-compose-leveler/issues"
   },
   "homepage": "https://github.com/ikari-pl/graphql-compose-leveler#readme",
+  "peerDependencies": {
+    "graphql": "^0.11.x",
+    "graphql-compose": "^2.9.x"
+  },
   "dependencies": {
-    "graphql": "^0.11.7",
     "graphql-anyscalar": "^1.1.2",
-    "graphql-compose": "^2.9.6",
     "lodash": "^4.17.4"
   },
   "devDependencies": {
