@@ -153,6 +153,8 @@ PRs accepted. Semver versioning used.
 ### Thanks
 
 * [**Pavel Chertorogov** (@nodkz)](https://github.com/nodkz) 🍻 for the awesome [graphql-compose][graphql-compose] library that is gold when building JS/TS services exposing a GraphQL API.
+
+  Also thanks for the hint to use JSON rather than AnyScalar
 * [**Peter Sieg** (@chasingmaxwell)](https://github.com/chasingmaxwell) 🍺 for [graphql-leveler][graphql-leveler] that was the original implementation for pure GraphQL projects.
 
 

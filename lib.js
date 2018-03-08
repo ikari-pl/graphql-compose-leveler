@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("graphql");
-const graphql_anyscalar_1 = require("graphql-anyscalar");
+const graphql_compose_1 = require("graphql-compose");
 const _ = require("lodash");
 // graphql-leveler implementation for graphql-compose
 function levelerize(tc, levelerVisited) {
@@ -18,10 +18,10 @@ function levelerize(tc, levelerVisited) {
             levelerize(tc.getFieldTC(fieldName), levelerVisited);
             fieldTC.addFields({
                 _get: {
-                    type: graphql_anyscalar_1.AnyScalar,
+                    type: "JSON",
                     args: {
                         path: "String!",
-                        defaultValue: graphql_anyscalar_1.AnyScalar,
+                        defaultValue: "JSON",
                         allowUndefined: "Boolean"
                     },
                     resolve: (obj, { path, defaultValue, allowUndefined = false }) => {
@@ -34,7 +34,7 @@ function levelerize(tc, levelerVisited) {
                 },
                 // bonus feature
                 _pluck: {
-                    type: new graphql_1.GraphQLList(graphql_anyscalar_1.AnyScalar),
+                    type: new graphql_1.GraphQLList(graphql_compose_1.GraphQLJSON),
                     args: {
                         list: "String!",
                         path: "String!",
