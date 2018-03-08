@@ -1,12 +1,5 @@
-import {
-  GraphQLBoolean,
-  GraphQLList,
-  GraphQLNonNull,
-  GraphQLObjectType,
-  GraphQLString
-} from "graphql";
-import { AnyScalar } from "graphql-anyscalar";
-import { ComposeStorage, TypeComposer } from "graphql-compose";
+import { GraphQLList, GraphQLObjectType } from "graphql";
+import { TypeComposer, GraphQLJSON } from "graphql-compose";
 import * as _ from "lodash";
 
 // graphql-leveler implementation for graphql-compose
@@ -26,10 +19,10 @@ function levelerize(tc: TypeComposer, levelerVisited: Set<string>) {
       levelerize(tc.getFieldTC(fieldName), levelerVisited);
       fieldTC.addFields({
         _get: {
-          type: AnyScalar,
+          type: "JSON",
           args: {
             path: "String!",
-            defaultValue: AnyScalar,
+            defaultValue: "JSON",
             allowUndefined: "Boolean"
           },
           resolve: (obj, { path, defaultValue, allowUndefined = false }) => {
@@ -42,7 +35,7 @@ function levelerize(tc: TypeComposer, levelerVisited: Set<string>) {
         },
         // bonus feature
         _pluck: {
-          type: new GraphQLList(AnyScalar),
+          type: new GraphQLList(GraphQLJSON),
           args: {
             list: "String!",
             path: "String!",
@@ -69,6 +62,6 @@ function levelerize(tc: TypeComposer, levelerVisited: Set<string>) {
   }
 }
 
-export default function(tc: TypeComposer) {
+export default function (tc: TypeComposer) {
   levelerize(tc, new Set<string>());
 }
