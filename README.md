@@ -1,4 +1,4 @@
-# graphql-compose-leveler
+# graphql-compose-leveler (:warning: not actively maintained) 
 
 > Lets GraphQL servers allow client queries to mutate the shape of response objects.
 
