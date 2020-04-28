@@ -1,6 +1,6 @@
 {
   "name": "graphql-compose-leveler",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Lets GraphQL servers allow client queries to mutate the shape of response objects. A graphql-leveler adaptation for use with graphql-compose.",
   "main": "lib.js",
   "scripts": {
@@ -33,7 +33,7 @@
     "graphql-compose": "^2.9.x"
   },
   "dependencies": {
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.12"
   },
   "devDependencies": {
     "@types/graphql": "^0.11.6",
