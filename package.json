@@ -33,7 +33,7 @@
     "graphql-compose": "^2.9.x"
   },
   "dependencies": {
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.12"
   },
   "devDependencies": {
     "@types/graphql": "^0.11.6",
